@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Budget Marjorie 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #F7F4EF;
+    --surface:   #FFFFFF;
+    --ink:       #1A1410;
+    --ink-soft:  #6B5E52;
+    --accent:    #C4622D;
+    --accent-lt: #F2DDD1;
+    --green:     #2D6B4A;
+    --green-lt:  #D1EDD9;
+    --red:       #B83232;
+    --red-lt:    #F5D5D5;
+    --amber:     #B87A00;
+    --amber-lt:  #FBF0D1;
+    --border:    #E2DAD1;
+    --shadow:    0 2px 16px rgba(26,20,16,0.08);
+    --radius:    14px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: white;
+    padding: 20px 28px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.01em;
+  }
+  header h1 span { color: #C4845A; }
+  .month-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .month-nav button {
+    background: rgba(255,255,255,0.12);
+    border: none;
+    color: white;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background .2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .month-nav button:hover { background: rgba(255,255,255,0.25); }
+  #current-month-label {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    min-width: 120px;
+    text-align: center;
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 860px; margin: 0 auto; padding: 24px 20px 60px; }
+
+  /* ── SOLDE CARDS ── */
+  .solde-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  .card-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .card-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.75rem;
+    line-height: 1;
+  }
+  .card-amount.positive { color: var(--green); }
+  .card-amount.negative { color: var(--red); }
+  .card-amount.neutral  { color: var(--ink); }
+  .card-sub {
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    margin-top: 5px;
+  }
+  .card.accent-green { background: var(--green-lt); border-color: #A8D9BB; }
+  .card.accent-red   { background: var(--red-lt);   border-color: #E8AAAA; }
+  .card.accent-amber { background: var(--amber-lt);  border-color: #E8CF88; }
+
+  /* ── ALERTES ── */
+  .alerts { margin-bottom: 20px; }
+  .alert-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--red-lt);
+    border: 1px solid #E8AAAA;
+    border-radius: 10px;
+    padding: 10px 16px;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--red);
+  }
+  .alert-item.warn {
+    background: var(--amber-lt);
+    border-color: #E8CF88;
+    color: var(--amber);
+  }
+
+  /* ── SAISIE ── */
+  .saisie-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .saisie-card h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-group.full { grid-column: 1/-1; }
+  label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  input, select {
+    border: 1.5px solid var(--border);
+    border-radius: 9px;
+    padding: 10px 13px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--ink);
+    background: var(--bg);
+    transition: border-color .2s;
+    width: 100%;
+  }
+  input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: white;
+  }
+  .type-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-radius: 9px;
+    overflow: hidden;
+    border: 1.5px solid var(--border);
+  }
+  .type-btn {
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    background: var(--bg);
+    color: var(--ink-soft);
+    transition: all .2s;
+    letter-spacing: 0.03em;
+  }
+  .type-btn.active-depense {
+    background: var(--red);
+    color: white;
+  }
+  .type-btn.active-recette {
+    background: var(--green);
+    color: white;
+  }
+  .btn-ajouter {
+    width: 100%;
+    padding: 13px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 9px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s, transform .1s;
+    letter-spacing: 0.03em;
+  }
+  .btn-ajouter:hover { background: #A8511F; }
+  .btn-ajouter:active { transform: scale(0.99); }
+
+  /* ── BUDGETS PAR CATÉGORIE ── */
+  .budgets-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .budgets-card h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 16px;
+  }
+  .budget-row {
+    margin-bottom: 14px;
+  }
+  .budget-row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+  }
+  .budget-cat-name {
+    font-size: 0.88rem;
+    font-weight: 500;
+  }
+  .budget-amounts {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+  .budget-amounts strong { color: var(--ink); }
+  .progress-bar {
+    height: 8px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width .4s ease;
+    background: var(--green);
+  }
+  .progress-fill.warn  { background: var(--amber); }
+  .progress-fill.over  { background: var(--red); }
+
+  /* ── TRANSACTIONS ── */
+  .transactions-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  .transactions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .transactions-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+  }
+  .filter-tabs {
+    display: flex;
+    gap: 6px;
+  }
+  .filter-tab {
+    padding: 5px 12px;
+    border-radius: 99px;
+    border: 1.5px solid var(--border);
+    background: var(--bg);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--ink-soft);
+    transition: all .2s;
+  }
+  .filter-tab.active {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+  .tx-list { display: flex; flex-direction: column; gap: 0; }
+  .tx-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+    animation: fadeIn .25s ease;
+  }
+  .tx-item:last-child { border-bottom: none; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; } }
+  .tx-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .tx-icon.depense { background: var(--red-lt); }
+  .tx-icon.recette { background: var(--green-lt); }
+  .tx-body { flex: 1; min-width: 0; }
+  .tx-label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tx-meta { font-size: 0.75rem; color: var(--ink-soft); margin-top: 1px; }
+  .tx-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .tx-amount.depense { color: var(--red); }
+  .tx-amount.recette { color: var(--green); }
+  .tx-delete {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--border);
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s;
+    flex-shrink: 0;
+  }
+  .tx-delete:hover { background: var(--red-lt); color: var(--red); }
+
+  .empty-state {
+    text-align: center;
+    padding: 32px;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+  }
+  .empty-state .icon { font-size: 2rem; margin-bottom: 8px; }
+
+  /* ── TABS NAVIGATION ── */
+  .nav-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+  .nav-tab {
+    padding: 8px 18px;
+    border-radius: 99px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--ink-soft);
+    transition: all .2s;
+    white-space: nowrap;
+    box-shadow: var(--shadow);
+  }
+  .nav-tab.active {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ── RÉCAP FIXES ── */
+  .fixes-list { display: flex; flex-direction: column; gap: 8px; }
+  .fixes-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    border-radius: 9px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+  .fixes-item .fixes-name { font-weight: 500; }
+  .fixes-item .fixes-amount { font-family: 'DM Serif Display', serif; color: var(--red); }
+  .fixes-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 14px;
+    border-radius: 9px;
+    background: var(--ink);
+    color: white;
+    font-weight: 600;
+    margin-top: 10px;
+    font-size: 0.9rem;
+  }
+  .fixes-total span:last-child { font-family: 'DM Serif Display', serif; font-size: 1.1rem; }
+
+  /* ── SETTINGS ── */
+  .settings-section { margin-bottom: 22px; }
+  .settings-section h3 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .settings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+  .settings-row:last-child { border-bottom: none; }
+  .settings-input {
+    width: 100px;
+    text-align: right;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    padding: 6px 10px;
+    font-size: 0.88rem;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-danger {
+    padding: 10px 18px;
+    background: var(--red-lt);
+    color: var(--red);
+    border: 1.5px solid #E8AAAA;
+    border-radius: 9px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .btn-danger:hover { background: var(--red); color: white; }
+  .btn-save {
+    padding: 10px 18px;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 9px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  @media (max-width: 600px) {
+    .solde-grid { grid-template-columns: 1fr 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .solde-grid .card:last-child { grid-column: 1/-1; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Budget <span>Marjorie</span></h1>
+  <div class="month-nav">
+    <button onclick="changeMonth(-1)">&#8249;</button>
+    <span id="current-month-label"></span>
+    <button onclick="changeMonth(1)">&#8250;</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- TABS -->
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showTab('tableau-bord')">📊 Tableau de bord</button>
+    <button class="nav-tab" onclick="showTab('saisie')">➕ Saisir</button>
+    <button class="nav-tab" onclick="showTab('categories')">📂 Catégories</button>
+    <button class="nav-tab" onclick="showTab('fixes')">🔒 Charges fixes</button>
+    <button class="nav-tab" onclick="showTab('reglages')">⚙️ Réglages</button>
+  </div>
+
+  <!-- ══ TABLEAU DE BORD ══ -->
+  <div id="tab-tableau-bord" class="tab-content active">
+
+    <div class="solde-grid">
+      <div class="card accent-green">
+        <div class="card-label">Recettes du mois</div>
+        <div class="card-amount positive" id="total-recettes">0,00 €</div>
+        <div class="card-sub" id="sub-recettes"></div>
+      </div>
+      <div class="card accent-red">
+        <div class="card-label">Dépenses du mois</div>
+        <div class="card-amount negative" id="total-depenses">0,00 €</div>
+        <div class="card-sub" id="sub-depenses"></div>
+      </div>
+      <div class="card" id="card-solde">
+        <div class="card-label">Solde restant</div>
+        <div class="card-amount neutral" id="solde-net">0,00 €</div>
+        <div class="card-sub" id="sub-solde"></div>
+      </div>
+    </div>
+
+    <div class="alerts" id="alerts-zone"></div>
+
+    <!-- Mini saisie rapide -->
+    <div class="saisie-card">
+      <h2>Saisie rapide</h2>
+      <div class="type-toggle" style="margin-bottom:12px">
+        <button class="type-btn active-depense" id="btn-depense" onclick="setType('depense')">− Dépense</button>
+        <button class="type-btn" id="btn-recette" onclick="setType('recette')">+ Recette</button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Montant (€)</label>
+          <input type="number" id="montant" placeholder="0,00" step="0.01" min="0">
+        </div>
+        <div class="form-group">
+          <label>Catégorie</label>
+          <select id="categorie"></select>
+        </div>
+        <div class="form-group full">
+          <label>Description</label>
+          <input type="text" id="description" placeholder="Ex: Courses Lidl">
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="date-tx">
+        </div>
+      </div>
+      <button class="btn-ajouter" onclick="ajouterTransaction()">Ajouter</button>
+    </div>
+
+    <!-- Transactions récentes -->
+    <div class="transactions-card">
+      <div class="transactions-header">
+        <h2>Transactions du mois</h2>
+        <div class="filter-tabs">
+          <button class="filter-tab active" onclick="setFilter('tout')">Tout</button>
+          <button class="filter-tab" onclick="setFilter('depense')">Dépenses</button>
+          <button class="filter-tab" onclick="setFilter('recette')">Recettes</button>
+        </div>
+      </div>
+      <div class="tx-list" id="tx-list"></div>
+    </div>
+  </div>
+
+  <!-- ══ SAISIE ══ -->
+  <div id="tab-saisie" class="tab-content">
+    <div class="saisie-card">
+      <h2>Nouvelle transaction</h2>
+      <div class="type-toggle" style="margin-bottom:12px">
+        <button class="type-btn active-depense" id="btn-depense2" onclick="setType2('depense')">− Dépense</button>
+        <button class="type-btn" id="btn-recette2" onclick="setType2('recette')">+ Recette</button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Montant (€)</label>
+          <input type="number" id="montant2" placeholder="0,00" step="0.01" min="0">
+        </div>
+        <div class="form-group">
+          <label>Catégorie</label>
+          <select id="categorie2"></select>
+        </div>
+        <div class="form-group full">
+          <label>Description</label>
+          <input type="text" id="description2" placeholder="Soyez précis : Ex: Lidl courses semaine">
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="date-tx2">
+        </div>
+        <div class="form-group">
+          <label>Moyen de paiement</label>
+          <select id="moyen-paiement">
+            <option value="Carte Crelan">Carte Crelan</option>
+            <option value="Visa BCC">Visa BCC (crédit)</option>
+            <option value="Cash">Cash</option>
+            <option value="Virement">Virement</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-ajouter" onclick="ajouterTransaction2()">Enregistrer</button>
+    </div>
+  </div>
+
+  <!-- ══ CATÉGORIES ══ -->
+  <div id="tab-categories" class="tab-content">
+    <div class="budgets-card">
+      <h2>Budgets par catégorie — <span id="cat-month-label"></span></h2>
+      <div id="budgets-list"></div>
+    </div>
+  </div>
+
+  <!-- ══ CHARGES FIXES ══ -->
+  <div id="tab-fixes" class="tab-content">
+    <div class="budgets-card">
+      <h2>Charges fixes mensuelles</h2>
+      <p style="font-size:0.82rem;color:var(--ink-soft);margin-bottom:16px">Débitées automatiquement chaque mois. Non comptées dans la saisie quotidienne.</p>
+      <div class="fixes-list" id="fixes-list"></div>
+    </div>
+  </div>
+
+  <!-- ══ RÉGLAGES ══ -->
+  <div id="tab-reglages" class="tab-content">
+    <div class="saisie-card">
+      <h2>Réglages</h2>
+
+      <div class="settings-section">
+        <h3>Budgets variables mensuels</h3>
+        <div id="settings-budgets"></div>
+        <button class="btn-save" style="margin-top:12px" onclick="saveBudgets()">Enregistrer les budgets</button>
+      </div>
+
+      <div class="settings-section">
+        <h3>Données</h3>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn-save" onclick="exportData()">📥 Exporter JSON</button>
+          <button class="btn-danger" onclick="clearMonth()">🗑 Effacer ce mois</button>
+          <button class="btn-danger" onclick="clearAll()">⚠️ Tout effacer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+// ══════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════
+const MOIS_FR = ["Janvier","Février","Mars","Avril","Mai","Juin",
+                 "Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
+
+let currentType  = 'depense';
+let currentType2 = 'depense';
+let currentFilter = 'tout';
+let viewYear  = new Date().getFullYear();
+let viewMonth = new Date().getMonth(); // 0-based
+
+// ── Catégories dépenses avec budgets estimés ──────────────────────────────
+const CAT_DEPENSES_DEFAULT = [
+  { id:'alimentation',  label:'Alimentation',            emoji:'🛒', budget:150 },
+  { id:'restauration',  label:'Restauration & sorties',  emoji:'🍽', budget:80  },
+  { id:'carburant',     label:'Carburant',               emoji:'⛽', budget:60  },
+  { id:'pharmacie',     label:'Pharmacie & santé',       emoji:'💊', budget:25  },
+  { id:'bien-etre',     label:'Bien-être & herboristerie',emoji:'🌿', budget:20  },
+  { id:'shopping',      label:'Shopping & vêtements',    emoji:'👗', budget:40  },
+  { id:'hygiene',       label:'Hygiène & droguerie',     emoji:'🧴', budget:15  },
+  { id:'presse',        label:'Presse & abonnements',    emoji:'📰', budget:12  },
+  { id:'divers',        label:'Divers',                  emoji:'📦', budget:40  },
+];
+
+const CAT_RECETTES = [
+  { id:'fgtb',          label:'Allocation FGTB',         emoji:'🏛' },
+  { id:'smart-yoga',    label:'Salaire Smart — Yoga',    emoji:'🧘' },
+  { id:'yoga-eleves',   label:'Recettes yoga élèves',    emoji:'💚' },
+  { id:'famille',       label:'Apport famille',          emoji:'👨‍👩‍👧' },
+  { id:'remboursement', label:'Remboursement',           emoji:'↩️' },
+  { id:'autre-recette', label:'Autre recette',           emoji:'💰' },
+];
+
+// ── Charges fixes (tirées du budget réel) ─────────────────────────────────
+const CHARGES_FIXES = [
+  { label:'Prêt hypothécaire (043+044)',   montant:415.00  },
+  { label:'AXA contrat 0106...',           montant:66.95   },
+  { label:'AXA contrat 0108...',           montant:47.20   },
+  { label:'SPW Fiscalité Wallonie',        montant:70.35   },
+  { label:'Interparking',                  montant:45.00   },
+  { label:'SETCA (cotisation syndicale)',  montant:11.25   },
+  { label:'Mobile Vikings',               montant:52.50   },
+  { label:'Énergie Engie + SDWE',         montant:65.00   },
+  { label:'Loyer salle yoga mercredi',    montant:150.00  },
+  { label:'Administration Communale Ath', montant:13.50   },
+  { label:'Mutualité Chrétienne',         montant:15.00   },
+];
+const TOTAL_FIXES = CHARGES_FIXES.reduce((s,c)=>s+c.montant,0);
+
+// ── Chargement localStorage ───────────────────────────────────────────────
+function getKey(year, month) { return `budget_marjorie_${year}_${month}`; }
+function getBudgetSettings()  { return JSON.parse(localStorage.getItem('budget_settings') || 'null') || CAT_DEPENSES_DEFAULT; }
+function saveBudgetSettings(s){ localStorage.setItem('budget_settings', JSON.stringify(s)); }
+
+function getTransactions(year, month) {
+  return JSON.parse(localStorage.getItem(getKey(year,month)) || '[]');
+}
+function saveTransactions(year, month, txs) {
+  localStorage.setItem(getKey(year,month), JSON.stringify(txs));
+}
+
+// ── Formatage ─────────────────────────────────────────────────────────────
+function eur(n) {
+  return n.toLocaleString('fr-BE', { minimumFractionDigits:2, maximumFractionDigits:2 }) + ' €';
+}
+
+// ══════════════════════════════════════════════════════
+// NAVIGATION MOIS
+// ══════════════════════════════════════════════════════
+function changeMonth(dir) {
+  viewMonth += dir;
+  if (viewMonth > 11) { viewMonth = 0;  viewYear++; }
+  if (viewMonth < 0)  { viewMonth = 11; viewYear--; }
+  render();
+}
+
+function updateMonthLabel() {
+  document.getElementById('current-month-label').textContent =
+    MOIS_FR[viewMonth] + ' ' + viewYear;
+  const el = document.getElementById('cat-month-label');
+  if (el) el.textContent = MOIS_FR[viewMonth] + ' ' + viewYear;
+}
+
+// ══════════════════════════════════════════════════════
+// TABS
+// ══════════════════════════════════════════════════════
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  if (id === 'tableau-bord') renderDashboard();
+  if (id === 'categories')   renderCategories();
+  if (id === 'fixes')        renderFixes();
+  if (id === 'reglages')     renderSettings();
+}
+
+// ══════════════════════════════════════════════════════
+// TYPE TOGGLE
+// ══════════════════════════════════════════════════════
+function setType(t) {
+  currentType = t;
+  document.getElementById('btn-depense').className = 'type-btn' + (t==='depense'?' active-depense':'');
+  document.getElementById('btn-recette').className = 'type-btn' + (t==='recette'?' active-recette':'');
+  populateCategories('categorie', t);
+}
+function setType2(t) {
+  currentType2 = t;
+  document.getElementById('btn-depense2').className = 'type-btn' + (t==='depense'?' active-depense':'');
+  document.getElementById('btn-recette2').className = 'type-btn' + (t==='recette'?' active-recette':'');
+  populateCategories('categorie2', t);
+}
+
+function populateCategories(selectId, type) {
+  const sel = document.getElementById(selectId);
+  if (!sel) return;
+  sel.innerHTML = '';
+  const cats = type === 'recette' ? CAT_RECETTES : getBudgetSettings();
+  cats.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c.id;
+    opt.textContent = c.emoji + ' ' + c.label;
+    sel.appendChild(opt);
+  });
+}
+
+// ══════════════════════════════════════════════════════
+// AJOUTER TRANSACTION
+// ══════════════════════════════════════════════════════
+function ajouterTransaction() {
+  const montant = parseFloat(document.getElementById('montant').value);
+  const desc    = document.getElementById('description').value.trim();
+  const cat     = document.getElementById('categorie').value;
+  const date    = document.getElementById('date-tx').value;
+
+  if (!montant || montant <= 0) { alert('Montant invalide'); return; }
+  if (!date) { alert('Date manquante'); return; }
+
+  const [y,m] = date.split('-').map(Number);
+  const txs = getTransactions(y, m-1);
+  const cats = currentType === 'recette' ? CAT_RECETTES : getBudgetSettings();
+  const catObj = cats.find(c=>c.id===cat) || {label:cat, emoji:'📦'};
+
+  txs.unshift({
+    id: Date.now(),
+    type: currentType,
+    montant,
+    description: desc || catObj.label,
+    categorie: cat,
+    categorieLabel: catObj.label,
+    emoji: catObj.emoji,
+    date,
+    moyen: 'Carte Crelan'
+  });
+  saveTransactions(y, m-1, txs);
+
+  document.getElementById('montant').value = '';
+  document.getElementById('description').value = '';
+  document.getElementById('date-tx').value = getTodayStr();
+  render();
+}
+
+function ajouterTransaction2() {
+  const montant = parseFloat(document.getElementById('montant2').value);
+  const desc    = document.getElementById('description2').value.trim();
+  const cat     = document.getElementById('categorie2').value;
+  const date    = document.getElementById('date-tx2').value;
+  const moyen   = document.getElementById('moyen-paiement').value;
+
+  if (!montant || montant <= 0) { alert('Montant invalide'); return; }
+  if (!date) { alert('Date manquante'); return; }
+
+  const [y,m] = date.split('-').map(Number);
+  const txs = getTransactions(y, m-1);
+  const cats = currentType2 === 'recette' ? CAT_RECETTES : getBudgetSettings();
+  const catObj = cats.find(c=>c.id===cat) || {label:cat, emoji:'📦'};
+
+  txs.unshift({
+    id: Date.now(),
+    type: currentType2,
+    montant,
+    description: desc || catObj.label,
+    categorie: cat,
+    categorieLabel: catObj.label,
+    emoji: catObj.emoji,
+    date,
+    moyen
+  });
+  saveTransactions(y, m-1, txs);
+
+  document.getElementById('montant2').value = '';
+  document.getElementById('description2').value = '';
+  document.getElementById('date-tx2').value = getTodayStr();
+  showTab('tableau-bord');
+}
+
+function supprimerTransaction(id) {
+  if (!confirm('Supprimer cette transaction ?')) return;
+  let txs = getTransactions(viewYear, viewMonth);
+  txs = txs.filter(t => t.id !== id);
+  saveTransactions(viewYear, viewMonth, txs);
+  render();
+}
+
+// ══════════════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════════════
+function render() {
+  updateMonthLabel();
+  renderDashboard();
+}
+
+function renderDashboard() {
+  const txs = getTransactions(viewYear, viewMonth);
+  const settings = getBudgetSettings();
+
+  const totalRec = txs.filter(t=>t.type==='recette').reduce((s,t)=>s+t.montant,0);
+  const totalDep = txs.filter(t=>t.type==='depense').reduce((s,t)=>s+t.montant,0);
+  const solde = totalRec - totalDep;
+
+  document.getElementById('total-recettes').textContent = eur(totalRec);
+  document.getElementById('total-depenses').textContent = eur(totalDep);
+  document.getElementById('solde-net').textContent = eur(solde);
+
+  const subDep = txs.filter(t=>t.type==='depense').length;
+  const subRec = txs.filter(t=>t.type==='recette').length;
+  document.getElementById('sub-recettes').textContent = subRec + ' opération' + (subRec>1?'s':'');
+  document.getElementById('sub-depenses').textContent = subDep + ' opération' + (subDep>1?'s':'');
+
+  const cardSolde = document.getElementById('card-solde');
+  const soldeEl   = document.getElementById('solde-net');
+  if (solde < 0) {
+    cardSolde.classList.add('accent-red');
+    cardSolde.classList.remove('accent-green');
+    soldeEl.classList.add('negative');
+    soldeEl.classList.remove('positive','neutral');
+    document.getElementById('sub-solde').textContent = 'Attention — déficit';
+  } else if (solde > 200) {
+    cardSolde.classList.add('accent-green');
+    cardSolde.classList.remove('accent-red');
+    soldeEl.classList.add('positive');
+    soldeEl.classList.remove('negative','neutral');
+    document.getElementById('sub-solde').textContent = 'Solde sain';
+  } else {
+    cardSolde.classList.remove('accent-green','accent-red');
+    soldeEl.classList.add('neutral');
+    soldeEl.classList.remove('positive','negative');
+    document.getElementById('sub-solde').textContent = 'Situation tendue';
+  }
+
+  // Alertes
+  const alertsZone = document.getElementById('alerts-zone');
+  alertsZone.innerHTML = '';
+  settings.forEach(cat => {
+    const spent = txs.filter(t=>t.type==='depense'&&t.categorie===cat.id)
+                     .reduce((s,t)=>s+t.montant,0);
+    const pct = cat.budget > 0 ? spent / cat.budget : 0;
+    if (pct > 1) {
+      alertsZone.innerHTML += `<div class="alert-item">🚨 ${cat.emoji} ${cat.label} : budget dépassé de ${eur(spent-cat.budget)} (${eur(spent)} / ${eur(cat.budget)})</div>`;
+    } else if (pct > 0.8) {
+      alertsZone.innerHTML += `<div class="alert-item warn">⚠️ ${cat.emoji} ${cat.label} : ${Math.round(pct*100)}% du budget utilisé (${eur(spent)} / ${eur(cat.budget)})</div>`;
+    }
+  });
+
+  // Transactions
+  const filtered = currentFilter === 'tout' ? txs
+    : txs.filter(t => t.type === currentFilter);
+
+  const list = document.getElementById('tx-list');
+  if (filtered.length === 0) {
+    list.innerHTML = `<div class="empty-state"><div class="icon">📭</div>Aucune transaction ce mois-ci</div>`;
+    return;
+  }
+  list.innerHTML = filtered.map(tx => {
+    const dateObj = new Date(tx.date + 'T00:00:00');
+    const dateStr = dateObj.toLocaleDateString('fr-BE', {day:'numeric',month:'short'});
+    const sign = tx.type === 'depense' ? '−' : '+';
+    return `
+    <div class="tx-item">
+      <div class="tx-icon ${tx.type}">${tx.emoji || (tx.type==='depense'?'💸':'💰')}</div>
+      <div class="tx-body">
+        <div class="tx-label">${tx.description}</div>
+        <div class="tx-meta">${dateStr} · ${tx.categorieLabel || ''} ${tx.moyen ? '· '+tx.moyen : ''}</div>
+      </div>
+      <div class="tx-amount ${tx.type}">${sign}${eur(tx.montant)}</div>
+      <button class="tx-delete" onclick="supprimerTransaction(${tx.id})" title="Supprimer">×</button>
+    </div>`;
+  }).join('');
+}
+
+function renderCategories() {
+  const txs = getTransactions(viewYear, viewMonth);
+  const settings = getBudgetSettings();
+  updateMonthLabel();
+  const el = document.getElementById('cat-month-label');
+  if (el) el.textContent = MOIS_FR[viewMonth] + ' ' + viewYear;
+
+  let html = '';
+  settings.forEach(cat => {
+    const spent = txs.filter(t=>t.type==='depense'&&t.categorie===cat.id)
+                     .reduce((s,t)=>s+t.montant,0);
+    const pct = cat.budget > 0 ? Math.min(spent/cat.budget, 1) : 0;
+    const pctReal = cat.budget > 0 ? spent/cat.budget : 0;
+    const fillClass = pctReal > 1 ? 'over' : pctReal > 0.8 ? 'warn' : '';
+    const remaining = cat.budget - spent;
+
+    html += `<div class="budget-row">
+      <div class="budget-row-header">
+        <span class="budget-cat-name">${cat.emoji} ${cat.label}</span>
+        <span class="budget-amounts">
+          <strong>${eur(spent)}</strong> / ${eur(cat.budget)}
+          ${remaining >= 0
+            ? `<span style="color:var(--green);margin-left:6px">+${eur(remaining)}</span>`
+            : `<span style="color:var(--red);margin-left:6px">−${eur(-remaining)}</span>`}
+        </span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill ${fillClass}" style="width:${Math.round(pct*100)}%"></div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('budgets-list').innerHTML = html;
+}
+
+function renderFixes() {
+  let html = '';
+  CHARGES_FIXES.forEach(c => {
+    html += `<div class="fixes-item">
+      <span class="fixes-name">${c.label}</span>
+      <span class="fixes-amount">${eur(c.montant)}</span>
+    </div>`;
+  });
+  html += `<div class="fixes-total">
+    <span>TOTAL MENSUEL CHARGES FIXES</span>
+    <span>${eur(TOTAL_FIXES)}</span>
+  </div>`;
+  document.getElementById('fixes-list').innerHTML = html;
+}
+
+function renderSettings() {
+  const settings = getBudgetSettings();
+  let html = '';
+  settings.forEach(cat => {
+    html += `<div class="settings-row">
+      <span>${cat.emoji} ${cat.label}</span>
+      <input type="number" class="settings-input" data-id="${cat.id}"
+             value="${cat.budget}" min="0" step="5">
+    </div>`;
+  });
+  document.getElementById('settings-budgets').innerHTML = html;
+}
+
+function saveBudgets() {
+  const settings = getBudgetSettings();
+  document.querySelectorAll('#settings-budgets input').forEach(inp => {
+    const cat = settings.find(c=>c.id===inp.dataset.id);
+    if (cat) cat.budget = parseFloat(inp.value) || 0;
+  });
+  saveBudgetSettings(settings);
+  alert('Budgets enregistrés ✓');
+  renderCategories();
+}
+
+function setFilter(f) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  renderDashboard();
+}
+
+// ══════════════════════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════════════════════
+function getTodayStr() {
+  const d = new Date();
+  return d.toISOString().split('T')[0];
+}
+
+function clearMonth() {
+  if (!confirm(`Effacer toutes les transactions de ${MOIS_FR[viewMonth]} ${viewYear} ?`)) return;
+  localStorage.removeItem(getKey(viewYear, viewMonth));
+  render();
+}
+
+function clearAll() {
+  if (!confirm('Effacer TOUTES les données ? Cette action est irréversible.')) return;
+  const keys = Object.keys(localStorage).filter(k=>k.startsWith('budget_marjorie'));
+  keys.forEach(k=>localStorage.removeItem(k));
+  render();
+}
+
+function exportData() {
+  const data = {};
+  Object.keys(localStorage).filter(k=>k.startsWith('budget_marjorie')).forEach(k=>{
+    data[k] = JSON.parse(localStorage.getItem(k));
+  });
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `budget_marjorie_export_${getTodayStr()}.json`;
+  a.click();
+}
+
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
+function init() {
+  const today = getTodayStr();
+  document.getElementById('date-tx').value = today;
+  document.getElementById('date-tx2').value = today;
+
+  populateCategories('categorie', 'depense');
+  populateCategories('categorie2', 'depense');
+
+  render();
+}
+
+init();
+</script>
+</body>
+</html>
+
